@@ -1,5 +1,20 @@
 from flask import Flask
 
+import os
+from urllib import parse
+import psycopg2
+
+parse.uses_netloc.append("postgres")
+url = parse.urlparse(os.environ["DATABASE_URL"])
+
+conn = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -9,4 +24,6 @@ def mainpage():
 #'/post/<int:post_id>'
 @app.route('/log/<int:value>')
 def logging(value):
-    return str(value)
+    cur = conn.cursor()
+    cur.execute("INSERT into RANDOM (dato) values ({})".format(value))
+    return "dato posteado"
