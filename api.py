@@ -28,3 +28,12 @@ def logging(value):
     cur.execute("INSERT into RANDOM (dato) values ({});".format(value))
     conn.commit()
     return "dato posteado: {}".format(value)
+
+@app.route('/view/<int:value>')
+def view_table(value):
+    response = ""
+    cur = conn.cursor()
+    cur.execute("SELECT dato from RANDOM;");
+    for i, dato in enumerate(cur):
+        response += "{}={}<br>".format(i, dato)
+    return response
