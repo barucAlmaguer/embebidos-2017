@@ -25,5 +25,6 @@ def mainpage():
 @app.route('/log/<int:value>')
 def logging(value):
     cur = conn.cursor()
-    cur.execute("INSERT into RANDOM (dato) values ({})".format(value))
-    return "dato posteado"
+    cur.execute("INSERT into RANDOM (dato) values ({});".format(value))
+    cur.commit()
+    return "dato posteado: {}".format(value)
