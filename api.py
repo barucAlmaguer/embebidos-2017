@@ -6,6 +6,7 @@ app = Flask(__name__)
 def mainpage():
     return "hola mundo"
 
+#'/post/<int:post_id>'
 @app.route('/log/<int:value>')
 def logging(value):
-    return value
+    return str(value)
