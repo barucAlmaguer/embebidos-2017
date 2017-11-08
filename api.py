@@ -26,5 +26,5 @@ def mainpage():
 def logging(value):
     cur = conn.cursor()
     cur.execute("INSERT into RANDOM (dato) values ({});".format(value))
-    cur.commit()
+    conn.commit()
     return "dato posteado: {}".format(value)
