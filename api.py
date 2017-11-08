@@ -33,7 +33,9 @@ def logging(value):
 def view_table(value):
     response = ""
     cur = conn.cursor()
-    cur.execute("SELECT dato from RANDOM;");
-    for i, dato in enumerate(cur):
+    cur.execute("SELECT dato from RANDOM ORDER BY id desc;");
+    for i, dato[0] in enumerate(cur):
+        if i >= value:
+            break
         response += "{}={}<br>".format(i, dato)
     return response
