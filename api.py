@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 import os
 from urllib import parse
@@ -39,3 +39,14 @@ def view_table(value):
             break
         response += "{}={}<br>".format(i, dato[0])
     return response
+
+
+@app.route('/json/<int:value>')
+def view_json(value):
+    response = view_table(value)
+    response_list = response.strip("<br>").split("<br>")
+    d = {}
+    for res in response_list:
+        k, v = res.split('=')
+        d[k] = v
+    return jsonify(d)
