@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def mainpage():
-    return "hola mundo"
+    return "hola mundo cruel"
 
 #'/post/<int:post_id>'
 @app.route('/log/<int:value>')
