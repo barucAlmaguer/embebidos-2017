@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 def get_sensordata():
     cur = conn.cursor()
-    cur.execute("SELECT dato from RANDOM ORDER BY id desc;")
+    cur.execute("SELECT dato from RANDOM ORDER BY id asc;")
     dic = {}
     for i, dato in enumerate(cur):
         dic[i] = dato
@@ -39,7 +39,7 @@ def logging(value):
     cur.execute("INSERT into RANDOM (dato) values ({});".format(value))
     conn.commit()
     #return "dato posteado: {}".format(value)
-    return chart()
+    return render_template('redirect_home.html')
 
 @app.route('/view/<int:value>')
 def view_table(value):
