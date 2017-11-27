@@ -20,7 +20,7 @@ conn = psycopg2.connect(
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/mundocruel/')
 def mainpage():
     return "hola mundo cruel"
 
@@ -54,7 +54,7 @@ def view_json(value):
         d[k] = v
     return jsonify(d)
 
-@app.route("/chart/")
+@app.route("/")
 def chart():
     labels = ["January","February","March","April","May","June","July","August"]
     values = [10,9,8,7,6,4,7,8]
