@@ -38,7 +38,8 @@ def logging(value):
     cur = conn.cursor()
     cur.execute("INSERT into RANDOM (dato) values ({});".format(value))
     conn.commit()
-    return "dato posteado: {}".format(value)
+    #return "dato posteado: {}".format(value)
+    return chart()
 
 @app.route('/view/<int:value>')
 def view_table(value):
