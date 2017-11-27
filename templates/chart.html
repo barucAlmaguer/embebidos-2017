@@ -1,5 +1,13 @@
 <!DOCTYPE html><html lang="en"><head>   <meta charset="utf-8" />   <title>Chart.js </title>      <!-- import plugin script -->   <script src='static/Chart.min.js'></script>   </head><body>
-    <h1>Flask Chart.js</h1><!-- bar chart canvas element --><canvas id="chart" width="600" height="400"></canvas>
+    <style>
+        .post-header { margin-bottom: 30px; position: relative; }
+        h1 { color: #c9d0d4; font-family: 'Helvetica Neue', sans-serif; font-size: 46px; font-weight: 100; line-height: 50px; letter-spacing: 1px; padding: 0 0 40px; border-bottom: double #555; }
+        p { color: #bbc3c8; font-family: 'Verdana', sans-serif; font-size: 16px; line-height: 26px; text-indent: 30px; margin: 0; }
+        a { color: #c64119; border-bottom: 1px solid #c64119; text-decoration: none; }
+        a:hover { color: #993213; border-bottom: 1px solid #993213; }
+        .date { color: #bbc3c8; background: #292929; display: inline-block; font-family: 'Georgia', serif; font-style: italic; font-size: 18px; line-height: 22px; margin: 0 0 20px 18px; padding: 10px 12px 8px; position: absolute; bottom: -36px; }
+    </style>
+    <h1>Sensor data</h1><!-- bar chart canvas element --><canvas id="chart" width="800" height="480"></canvas>
 
     <script>
         
@@ -10,12 +18,12 @@
                      {% endfor %}],
           datasets : [
              {
-                   fillColor: "rgba(151,187,205,0.2)",
-                   strokeColor: "rgba(151,187,205,1)",
-                   pointColor: "rgba(151,187,205,1)",
+                   fillColor: "rgba(220,80,60,0.2)",
+                   strokeColor: "rgba(220,80,60,1)",
+                   pointColor: "rgba(220,80,60,1)",
                    pointStrokeColor: "#fff",
                    pointHighlightFill: "#fff",
-                   pointHighlightStroke: "rgba(151,187,205,1)",
+                   pointHighlightStroke: "rgba(220,80,60,1)",
                    bezierCurve : false,
                    data : [{% for item in values %}
                              {{item}},
