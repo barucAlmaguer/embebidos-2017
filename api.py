@@ -20,6 +20,14 @@ conn = psycopg2.connect(
 
 app = Flask(__name__)
 
+def get_sensordata():
+    cur = conn.cursor()
+    cur.execute("SELECT dato from RANDOM ORDER BY id desc;")
+    dic = {}
+    for i, dato in enumerate(cur):
+        dic[i] = dato
+    return dic
+
 @app.route('/mundocruel/')
 def mainpage():
     return "hola mundo cruel"
@@ -56,9 +64,12 @@ def view_json(value):
 
 @app.route("/")
 def chart():
-    labels = ["January","February","March","April","May","June","July","August"]
-    values = [10,9,8,7,6,4,7,8]
+    #labels = ["January","February","March","April","May","June","July","August"]
+    #values = [10,9,8,7,6,4,7,8]
+    d = get_sensordata()
+    labels = [d for d in list(d.keys())]
+    values = [d[0] for d in list(d.values())]
     return render_template('chart.html', values=values, labels=labels)
- 
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
