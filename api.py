@@ -83,8 +83,18 @@ def show_weight():
         break
     return render_template('weight.html', datos=datos)
 
-@app.route('/api/logweight/<uuid>', methods=['GET', 'POST'])
-def logweight(uuid):
+@app.route('/api/setweight/<float:weight>')
+def setweight(weight):
+    """UPDATE lagrange SET peso=0.540 WHERE id=1;"""
+    cur = conn.cursor()
+    cur.execute("UPDATE lagrange SET peso={} WHERE id=1;".format(weight))
+    conn.commit()
+    print ("Peso actual = {}kg".format(weight))
+    return show_weight()
+
+@app.route('/api/jsonweight/<uuid>', methods=['GET', 'POST'])
+def jsonweight(uuid):
+    """UPDATE lagrange SET peso=0.540 WHERE id=1;"""
     content = request.get_json(silent=True)
     print (content)
     return uuid
