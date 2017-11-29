@@ -111,6 +111,7 @@ def jsonweight():
     content = request.get_json(silent=True)
     js = request.json if request.is_json else "Not json"
     data = js #json.loads(js)
+    print("michel envia: {}".format(data))
     return render_template("json_weight.html", json = data)
 
 if __name__ == "__main__":
