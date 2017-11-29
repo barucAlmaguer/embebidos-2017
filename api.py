@@ -72,5 +72,20 @@ def chart():
     values = [d[0] for d in list(d.values())]
     return render_template('chart.html', values=values, labels=labels)
 
+#lagrange stuff
+@app.route("/weight/")
+def show_weight():
+    cur = conn.cursor()
+    cur.execute("SELECT peso from lagrange WHERE id = 1;")
+    datos = {}
+    datos['peso'] = cur[0][0]
+    return render_template('weight.html', datos=datos)
+
+@app.route('/api/logweight/<uuid>', methods=['GET', 'POST'])
+def logweight(uuid):
+    content = request.get_json(silent=True)
+    print (content)
+    return uuid
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
