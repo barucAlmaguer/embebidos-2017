@@ -95,9 +95,13 @@ def setweight(weight):
 @app.route('/api/jsonweight/', methods=['GET', 'POST'])
 def jsonweight():
     """UPDATE lagrange SET peso=0.540 WHERE id=1;"""
+    print("json weight!!!") 
     content = request.get_json(silent=True)
-    print ("json posteado = {}".format(content))
-    return "json posteado = {}".format(content)
+    js = request.json if request.is_json else "Not json"
+    print ("content = {}".format(content))
+    print("json = {}".format(js))
+    print("mime type: {}".format(request.mimetype))
+    return jsonify({"respuesta": "hola"})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
