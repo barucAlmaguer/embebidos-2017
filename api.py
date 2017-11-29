@@ -78,7 +78,9 @@ def show_weight():
     cur = conn.cursor()
     cur.execute("SELECT peso from lagrange WHERE id = 1;")
     datos = {}
-    datos['peso'] = cur[0][0]
+    for record in cur:
+        datos['peso'] = record[0]
+        break
     return render_template('weight.html', datos=datos)
 
 @app.route('/api/logweight/<uuid>', methods=['GET', 'POST'])
