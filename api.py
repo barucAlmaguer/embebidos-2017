@@ -92,16 +92,26 @@ def setweight(weight):
     print ("Peso actual = {}kg".format(weight))
     return show_weight()
 
+"""
+d = {
+	"peso_total": 1.50,
+	"variacion_peso": 0.250,
+	"tara": 0.200}
+
+res = requests.post("https://embebidos-2017.herokuapp.com/api/jsonweight/", json=d)
+res.text
+res #200, 404, 405 etc
+"""
 @app.route('/api/jsonweight/', methods=['GET', 'POST'])
 def jsonweight():
-    """UPDATE lagrange SET peso=0.540 WHERE id=1;"""
-    print("json weight!!!") 
+    #print("json weight!!!") 
+    #print ("content = {}".format(content))
+    #print("json = {}".format(js))
+    #print("mime type: {}".format(request.mimetype))
     content = request.get_json(silent=True)
     js = request.json if request.is_json else "Not json"
-    print ("content = {}".format(content))
-    print("json = {}".format(js))
-    print("mime type: {}".format(request.mimetype))
-    return jsonify({"respuesta": "hola"})
+    data = js #json.loads(js)
+    return render_template("json_weight.html", json = data)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
