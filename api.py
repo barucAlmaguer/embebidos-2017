@@ -2,7 +2,7 @@ from flask import jsonify
 from flask import Markup
 from flask import Flask
 from flask import render_template
-
+from flask import request
 import os
 from urllib import parse
 import psycopg2
@@ -92,12 +92,12 @@ def setweight(weight):
     print ("Peso actual = {}kg".format(weight))
     return show_weight()
 
-@app.route('/api/jsonweight/<uuid>', methods=['GET', 'POST'])
-def jsonweight(uuid):
+@app.route('/api/jsonweight/', methods=['GET', 'POST'])
+def jsonweight():
     """UPDATE lagrange SET peso=0.540 WHERE id=1;"""
     content = request.get_json(silent=True)
-    print (content)
-    return uuid
+    print ("json posteado = {}".format(content))
+    return "json posteado = {}".format(content)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
