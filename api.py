@@ -6,6 +6,7 @@ from flask import request
 import os
 from urllib import parse
 import psycopg2
+import json
 
 parse.uses_netloc.append("postgres")
 url = parse.urlparse(os.environ["DATABASE_URL"])
@@ -111,6 +112,12 @@ def jsonweight():
     content = request.get_json(silent=True)
     js = request.json if request.is_json else "Not json"
     data = js #json.loads(js)
+    
+    #postea datos a BD:
+    cur = conn.cursor()
+    query = "UPDATE scale SET weightdata='{}' WHERE id=1;".format(json.dumps(js))
+    cur.execute(query)
+    conn.commit()
     print("michel envia: {}".format(data))
     return render_template("json_weight.html", json = data)
 
